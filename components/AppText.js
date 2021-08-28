@@ -15,10 +15,12 @@ const styleObj = Platform.select({
     ios: {
         fontSize: 20,
         fontFamily: 'Avenir',
+        fontWeight: '800'
     },
     android: {
-        fontSize: 18,
-        fontFamily: 'Roboto'
+        fontSize: 20,
+        fontFamily: 'Roboto',
+        fontWeight: '800'
     }
 })
 
