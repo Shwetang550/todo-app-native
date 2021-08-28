@@ -29,7 +29,7 @@ const Task = ({text, onPressDelete}) => {
                 <MaterialCommunityIcons
                     name='trash-can'
                     color="#DC3545"
-                    size={35}
+                    size={30}
                 />
             </TouchableOpacity>
 
