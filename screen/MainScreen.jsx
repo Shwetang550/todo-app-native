@@ -1,6 +1,9 @@
 import React from 'react'
-import { Platform, SafeAreaView, StyleSheet, Text, View } from 'react-native'
+import { KeyboardAvoidingView, Platform, SafeAreaView, StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native'
 import Constants from 'expo-constants';
+
+// expo-icons
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 // custom components
 import AppText from '../components/AppText';
@@ -20,6 +23,28 @@ const MainScreen = () => {
                 <Task text="Hello World" />
                 <Task text="Hello 2nd World..." />
             </View>
+
+            {/* Task Input */}
+            <KeyboardAvoidingView
+                behavior={Platform.OS === 'android' ? 'height' : 'padding'}
+                style={styles.inputArea}
+            >
+                
+                <TextInput
+                    style={styles.input}
+                    placeholder="Enter Your Task here..."
+                />
+
+                <TouchableOpacity
+                    onPress={() => console.log()}
+                >
+                    <MaterialCommunityIcons
+                        name="plus"
+                        style={styles.inputIcon}
+                    />
+                </TouchableOpacity>
+
+            </KeyboardAvoidingView>
             
         </SafeAreaView>
     )
@@ -46,5 +71,30 @@ const styles = StyleSheet.create({
     tasksContainer: {
         marginTop: 20,
         margin: Platform.OS === 'android' ? 0 : 15,
-    }
+    },
+    inputArea: {
+        backgroundColor: '#fff',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        borderRadius: 999,
+        padding: 13,
+
+        marginHorizontal: 23,
+        width: '100%',
+        
+        position: 'absolute',
+        bottom: 25,
+    },
+    input: {
+        fontSize: 18,
+        marginHorizontal: 12,
+    },
+    inputIcon: {
+        marginHorizontal: 12,
+        fontSize: 30,
+        color: '#157AF6',
+        fontWeight: 'bold',
+    },
 })
