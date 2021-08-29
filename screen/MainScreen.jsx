@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { KeyboardAvoidingView, Platform, SafeAreaView, StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native'
 import Constants from 'expo-constants';
 
@@ -10,6 +10,19 @@ import AppText from '../components/AppText';
 import Task from '../components/Task';
 
 const MainScreen = () => {
+    const [tasks, setTasks] = useState(['H1']);
+    const [enterTask, setEnterTask] = useState('');
+
+    const handleTaskAddition = () => {
+        setTasks([...tasks, enterTask]);
+        setEnterTask('');
+    };
+
+    const handleDelete = (text) => {
+        const newTasksList = tasks.filter(i => i !== text);
+        setTasks(newTasksList);
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             
@@ -20,8 +33,15 @@ const MainScreen = () => {
 
             <View style={styles.tasksContainer}>
                 {/* Tasks List */}
-                <Task text="Hello World" />
-                <Task text="Hello 2nd World..." />
+                {
+                    tasks.map((item, index) => (
+                        <Task
+                            key={index}
+                            text={item}
+                            onPressDelete={handleDelete}
+                        />
+                    ))
+                }
             </View>
 
             {/* Task Input */}
@@ -32,11 +52,13 @@ const MainScreen = () => {
                 
                 <TextInput
                     style={styles.input}
-                    placeholder="Enter Your Task here..."
+                    placeholder={"Enter Your Task here..."}
+                    value={enterTask}
+                    onChangeText={text => setEnterTask(text)}
                 />
 
                 <TouchableOpacity
-                    onPress={() => console.log()}
+                    onPress={handleTaskAddition}
                 >
                     <MaterialCommunityIcons
                         name="plus"
@@ -79,19 +101,23 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         borderRadius: 999,
-        padding: 13,
+        paddingVertical: 10,
 
-        marginHorizontal: 23,
-        width: '100%',
+        marginHorizontal: 25,
+        width: Platform.OS === 'android' ? '100%' : '85%',
         
         position: 'absolute',
         bottom: 25,
     },
     input: {
         fontSize: 18,
-        marginHorizontal: 12,
+        margin: Platform.OS === 'android' ? null : 12,
+        padding: 10,
+        // paddingBottom: Platform.OS === 'android' ? null : 12,
+        // alignItems: 'center',
+        // justifyContent: 'center',
     },
     inputIcon: {
         marginHorizontal: 12,

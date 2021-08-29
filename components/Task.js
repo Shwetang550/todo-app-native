@@ -24,7 +24,7 @@ const Task = ({text, onPressDelete}) => {
             </View>
                 
             <TouchableOpacity
-                onPress={() => console.log()}
+                onPress={() => onPressDelete(text)}
             >
                 <MaterialCommunityIcons
                     name='trash-can'
