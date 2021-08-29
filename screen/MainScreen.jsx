@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
     },
     inputArea: {
         backgroundColor: '#fff',
+        borderColor: '#c0c0c0',
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
